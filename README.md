@@ -13,3 +13,7 @@ This project will be a generified image processing server. Planning to make this
   * I think compression will be the most important factor over here. 
   * Also getting them ASAP. 
   * Is S3 or Blob storage free in the cloud? If it isn't I have to implement that stuff myself. 
+* They call content like images, videos, sound as static content.
+  * Can I use NGINX to just serve em?
+  * Or should I make an API?
+  
