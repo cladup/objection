@@ -16,4 +16,7 @@ This project will be a generified image processing server. Planning to make this
 * They call content like images, videos, sound as static content.
   * Can I use NGINX to just serve em?
   * Or should I make an API?
-  
+* Asynchronous commitment
+  * Actually get images from the storage, but how to make it async.
+  * I/O will all be async. Including database queries and storage queries.
+  * The problem is, how to find the right implementation for async libraries.
