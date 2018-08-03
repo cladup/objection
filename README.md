@@ -20,3 +20,14 @@ This project will be a generified image processing server. Planning to make this
   * Actually get images from the storage, but how to make it async.
   * I/O will all be async. Including database queries and storage queries.
   * The problem is, how to find the right implementation for async libraries.
+    * This is a tough question. You might not need async in this stuff. 
+    * How to make I/O on disk async? Doesn't it just stop everything?
+    * If you put the stuff up on like S3 or something, I think it won't be a big deal.
+
+## Development Stack
+* Thinking of Golang atm.
+  * Because of concurrency! I also heard that this kid was great at processing this kind of stuff.
+* Need more thinking about storage. How to actually store all the objects.
+  * Is there a great database that stores blob data? Or is S3 just the way to go.
+  * Also, I need to think whether to use a RDBMS or NoSQL db for aliasing.
+  * Not sure whether that needs any of relationships.
