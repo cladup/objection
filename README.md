@@ -1,10 +1,9 @@
 # Mememime
-This project will be a generified image processing server. Planning to make this server able to process images on the fly, and even make a bulk upload client. Hope this project makes a lot of developers live's better!
+This project will be a generalized image processing server. Planning to make this server able to process images on the fly, and even make a bulk upload client. Hope this project makes a lot of developers live's better!
 
 ## TODO
 * How to truly optimize images/videos/music -> Maybe you could make a compression algorithm lol.
   * Cropping and compression on the fly & CDN stuff.
-  * On what condition to crop?
 * Thinking about the processer & resource server.
   * The processer and the server must be not together. They are separate services.
 * How does binary data get processed when uploading and downloading in the server & vise versa.
@@ -25,9 +24,12 @@ This project will be a generified image processing server. Planning to make this
     * If you put the stuff up on like S3 or something, I think it won't be a big deal.
 
 ## Development Stack
-* Thinking of Golang atm.
+* I did think about Golang, but I'm going to use Python for fast implementation.
   * Because of concurrency! I also heard that this kid was great at processing this kind of stuff.
+    * This statement only goes with golang. But I have to find a way with Python
+  * Make a concurrent server, and also split it with CQRS.
 * Need more thinking about storage. How to actually store all the objects.
   * Is there a great database that stores blob data? Or is S3 just the way to go.
   * Also, I need to think whether to use a RDBMS or NoSQL db for aliasing.
   * Not sure whether that needs any of relationships.
+
