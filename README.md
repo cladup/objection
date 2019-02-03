@@ -1,5 +1,6 @@
 # Mememime
-This project will be a generalized image processing server. Planning to make this server able to process images on the fly, and even make a bulk upload client. Hope this project makes a lot of developers live's better!
+This is an implementation of the [IIIF(International Image Interoperability Framework)](https://iiif.io) specification.
+Version: [Image API 2.1](https://iiif.io/api/image/2.1/)
 
 ## TODO
 * How to truly optimize images/videos/music -> Maybe you could make a compression algorithm lol.
@@ -33,3 +34,5 @@ This project will be a generalized image processing server. Planning to make thi
   * Also, I need to think whether to use a RDBMS or NoSQL db for aliasing.
   * Not sure whether that needs any of relationships.
 
+# License
+MIT
