@@ -14,7 +14,10 @@ db = SQLAlchemy(app)
 def not_found(error):
     return 'Not Found', 404
 
-# TODO: Register blueprints
+# Register blueprints
+from app.image.controllers import image_page
+
+app.register_blueprint(image_page)
 
 # Setup database
 db.create_all()
