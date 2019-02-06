@@ -18,7 +18,7 @@ depends_on = None
 
 def upgrade():
     op.create_table(
-        'images',
+        'objects',
         sa.Column('id', sa.Integer, primary_key=True),
         sa.Column('alias', sa.String(100), nullable=False),
         sa.Column('object_name', sa.String(100), nullable=False),
