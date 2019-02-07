@@ -15,9 +15,9 @@ def not_found(error):
     return 'Not Found', 404
 
 # Register blueprints
-from app.image.controllers import image_page
+from app.object.controllers import object_page
 
-app.register_blueprint(image_page)
+app.register_blueprint(object_page)
 
 # Setup database
 db.create_all()
