@@ -4,7 +4,7 @@ from flask import Blueprint
 object_page = Blueprint('objects', __name__)
 
 
-@image_page.route('/objects', methods=['GET'])
-def objects():
+@object_page.route('/objects', methods=['GET'])
+def list():
     return "Hello, World!"
 
