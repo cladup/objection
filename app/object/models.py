@@ -15,3 +15,9 @@ class Object(db.Model):
     updated_at = db.Column(db.DateTime,  default=db.func.current_timestamp(), 
             onupdate=db.func.current_timestamp())
 
+    def __init__(self, alias, name, type, status): 
+        self.alias = alias
+        self.name = name
+        self.type = type
+        self.status = status
+
