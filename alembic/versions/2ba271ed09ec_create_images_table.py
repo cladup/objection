@@ -21,7 +21,7 @@ def upgrade():
         'objects',
         sa.Column('id', sa.Integer, primary_key=True),
         sa.Column('alias', sa.String(100), nullable=False),
-        sa.Column('object_name', sa.String(100), nullable=False),
+        sa.Column('name', sa.String(100), nullable=False),
         sa.Column('type', sa.String(50), nullable=False),
         sa.Column('status', sa.String(50), nullable=False),
         sa.Column('updated_at', sa.DateTime, nullable=False),
@@ -30,5 +30,5 @@ def upgrade():
 
 
 def downgrade():
-    op.drop_table('images')
+    op.drop_table('objects')
 
