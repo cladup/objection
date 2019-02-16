@@ -15,6 +15,7 @@ pytest = "*"
 alembic = "*"
 google-cloud-storage = "*"
 sphinx = "*"
+nanoid = "*"
 
 [requires]
 python_version = "3.7"
