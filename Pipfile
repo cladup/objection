@@ -6,6 +6,7 @@ verify_ssl = true
 [dev-packages]
 ipython = "*"
 sphinx = "*"
+python-dotenv = "*"
 
 [packages]
 flask = "*"
@@ -16,6 +17,7 @@ alembic = "*"
 google-cloud-storage = "*"
 sphinx = "*"
 nanoid = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.7"
