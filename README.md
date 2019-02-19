@@ -1,6 +1,6 @@
-# Mememime
-This is an implementation of the [IIIF(International Image Interoperability Framework)](https://iiif.io) specification.
-Version: [Image API 2.1](https://iiif.io/api/image/2.1/)
+# Objection!
+Object server for Clad Up! Does object processing and also serve!
+Will implement CQRS style for scaling read/write.
 
 ## TODO
 * How to truly optimize images/videos/music -> Maybe you could make a compression algorithm lol.
@@ -36,3 +36,4 @@ Version: [Image API 2.1](https://iiif.io/api/image/2.1/)
 
 # License
 MIT
+
