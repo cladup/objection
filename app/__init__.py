@@ -1,10 +1,11 @@
+import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 
 # Init flask application
 app = Flask(__name__)
-app.config.from_object('config')
+app.config.from_object(os.getenv('APP_CONFIG'))
 
 # Init database with SQLAlchemy
 db = SQLAlchemy(app)
