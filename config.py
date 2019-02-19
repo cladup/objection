@@ -9,6 +9,6 @@ load_dotenv(verbose=True)
 DEBUG = True
 
 # Database connection
-SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URI", "mysql://user:password@db:3306/mememime")
+SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URI", "mysql://user:password@db:3306/mememime")
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
