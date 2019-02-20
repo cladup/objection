@@ -1,6 +1,11 @@
 from app import db
 
 
+STATUS_STAGING = 'staging'
+STATUS_ALIASED = 'aliased'
+STATUS_UNALIASED = 'unaliased'
+
+
 class Object(db.Model):
     """
     `objects` table
@@ -15,9 +20,16 @@ class Object(db.Model):
     updated_at = db.Column(db.DateTime,  default=db.func.current_timestamp(), 
             onupdate=db.func.current_timestamp())
 
-    def __init__(self, alias, name, type, status): 
+    def __init__(self, alias, name, type):
         self.alias = alias
         self.name = name
         self.type = type
-        self.status = status
+        self.status = STATUS_STAGING
+
+    def save(self):
+        """
+        Save object information
+        """
+        db.session.add(self)
+        db.session.commit()
 

@@ -1,5 +1,7 @@
-from flask import Blueprint, request, Response
+from flask import Blueprint, request, Response, jsonify
 from app.util import uploader
+from app.object.models import Object
+from app.object.json_schemas import ObjectSchema
 
 
 object_page = Blueprint('objects', __name__)
@@ -18,8 +20,13 @@ def create():
     if not uploader.allowed_file(graphic_model.filename):
         return Response("File extension not allowed", 400)
     # Upload and save to database
-    # TODO: Save to database
-    return uploader.upload(graphic_model).name
+    uploaded_blob = uploader.upload(graphic_model)
+    file_type = uploader.file_extension(uploaded_blob.name)
+    new_object = Object(uploaded_blob.name, uploaded_blob.name, file_type)
+    new_object.save()
+    schema = ObjectSchema()
+    result = { 'data': { 'object': schema.dumps(new_object) } }
+    return jsonify(result)
 
 
 @object_page.route('/objects', methods=['GET'])
