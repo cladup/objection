@@ -33,3 +33,12 @@ class Object(db.Model):
         db.session.add(self)
         db.session.commit()
 
+    def alias(self, alias):
+        """
+        Alias object with name
+        """
+        self.alias = alias
+        self.status = STATUS_ALIASED
+        db.session.add(self)
+        db.session.commit()
+

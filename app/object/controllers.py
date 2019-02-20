@@ -1,4 +1,4 @@
-from flask import Blueprint, request, Response, jsonify
+from flask import Blueprint, request, Response, jsonify, abort
 from app.util import uploader
 from app.object.models import Object
 from app.object.json_schemas import ObjectSchema
@@ -25,6 +25,21 @@ def create():
     new_object = Object(uploaded_blob.name, uploaded_blob.name, file_type)
     new_object.save()
     schema = ObjectSchema()
-    result = schema.dumps(new_object)
-    return result
+    return schema.dumps(new_object)
+
+
+@object_page.route('/objects/<name>', methods=['PATCH'])
+def alias(name):
+    """
+    Alias object name
+    """
+    alias = request.get_json().get('alias')
+    if alias == None:
+        return Response("Alias is missing", 400)
+    aliasing_object = Object.query.filter_by(name=name).first()
+    if aliasing_object == None:
+        abort(404)
+    aliasing_object.alias(alias)
+    schema = ObjectSchema()
+    return schema.dumps(aliasing_object)
 
