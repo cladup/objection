@@ -17,8 +17,10 @@ def not_found(error):
 
 # Register blueprints
 from app.object.controllers import object_page
+from app.admin.controllers import admin_page
 
 app.register_blueprint(object_page)
+app.register_blueprint(admin_page)
 
 # Setup database
 db.create_all()
