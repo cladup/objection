@@ -5,9 +5,9 @@ from nanoid import generate
 from werkzeug.utils import secure_filename
 
 
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'fbx', 'glb', 'gltf'])
+IMAGE_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 GRAPHIC_EXTENSIONS = set(['fbx', 'glb', 'gltf'])
-
+ALLOWED_EXTENSIONS = IMAGE_EXTENSIONS.union(GRAPHIC_EXTENSIONS)
 
 def upload(graphic_object):
     """
