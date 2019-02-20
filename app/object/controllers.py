@@ -28,19 +28,3 @@ def create():
     result = schema.dumps(new_object)
     return result
 
-
-@object_page.route('/objects', methods=['GET'])
-def get():
-    """
-    FIXME: Create debug purpose file input UI
-    """
-    return '''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-      <input type=file name=graphic_model>
-      <input type=submit value=Upload>
-    </form>
-    '''
-
