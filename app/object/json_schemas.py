@@ -1,4 +1,4 @@
-from marshmallow import Schema, fields
+from marshmallow_jsonapi import Schema, fields
 
 
 class ObjectSchema(Schema):
@@ -10,4 +10,8 @@ class ObjectSchema(Schema):
     name = fields.Str()
     type = fields.Str()
     status = fields.Str()
+
+    class Meta:
+        type_ = 'objects'
+        strict = True
     

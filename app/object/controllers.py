@@ -25,8 +25,8 @@ def create():
     new_object = Object(uploaded_blob.name, uploaded_blob.name, file_type)
     new_object.save()
     schema = ObjectSchema()
-    result = { 'data': { 'object': schema.dumps(new_object) } }
-    return jsonify(result)
+    result = schema.dumps(new_object)
+    return result
 
 
 @object_page.route('/objects', methods=['GET'])
