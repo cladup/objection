@@ -19,7 +19,7 @@ def create():
         return Response("File extension not allowed", 400)
     # Upload and save to database
     # TODO: Save to database
-    return uploader.upload(graphic_model)
+    return uploader.upload(graphic_model).name
 
 
 @object_page.route('/objects', methods=['GET'])

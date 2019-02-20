@@ -6,6 +6,7 @@ from werkzeug.utils import secure_filename
 
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'fbx', 'glb', 'gltf'])
+GRAPHIC_EXTENSIONS = set(['fbx', 'glb', 'gltf'])
 
 
 def upload(graphic_object):
@@ -22,9 +23,12 @@ def upload(graphic_object):
             str(timestamp),
             _file_extension(secure_filename(graphic_object.filename)))
     blob = bucket.blob(destination_blob_name)
-    # TODO: Decide content_type for graphic models
-    blob.upload_from_file(graphic_object, content_type=graphic_object.content_type)
-    return blob.name
+    content_type = graphic_object.content_type
+    if _file_extension(secure_filename(graphic_object.filename)) in GRAPHIC_EXTENSIONS:
+        content_type = _determine_graphic_content_type(graphic_object.filename)
+    # TODO: Change fbx blob to glTF and save both.
+    blob.upload_from_file(graphic_object, content_type=content_type)
+    return blob
 
 
 def allowed_file(filename):
@@ -40,4 +44,20 @@ def _file_extension(filename):
     Get file extension from filename
     """
     return filename.rsplit('.', 1)[1].lower()
+
+
+def _determine_graphic_content_type(filename):
+    """
+    Determine content type of graphic model(fbx, glb, or glTF)
+    """
+    file_extension = _file_extension(secure_filename(filename))
+    content_type = 'application/octet-stream'
+    if file_extension == 'fbx':
+        # TODO: Change when fbx gets a mime type
+        content_type = 'application/octet-stream'
+    elif file_extension == 'glb':
+        content_type = 'model/gltf-binary'
+    elif file_extension == 'gltf':
+        content_type = 'model/gltf+json'
+    return content_type
 
