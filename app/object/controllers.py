@@ -46,6 +46,11 @@ def alias(name):
     alias = request.get_json().get('alias')
     if alias == None:
         return Response("Alias is missing", 400)
+    # Unalias object when alias exists
+    aliased_object = Object.query.filter_by(alias=alias, status=STATUS_ALIASED).first()
+    if aliased_object != None:
+        aliased_object.unalias()
+    # Alias object
     aliasing_object = Object.query.filter_by(name=name, status=STATUS_STAGING).first()
     if aliasing_object == None:
         abort(404)
