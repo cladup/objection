@@ -54,12 +54,12 @@ def alias(name):
     return schema.dumps(aliasing_object)
 
 
-@object_page.route('/v1/objects/<alias>', methods=['DELETE'])
-def unalias(alias):
+@object_page.route('/v1/objects/<name>', methods=['DELETE'])
+def unalias(name):
     """
     Unalias object
     """
-    unaliasing_object = Object.query.filter_by(alias=alias, status=STATUS_ALIASED).first()
+    unaliasing_object = Object.query.filter_by(name=name, status=STATUS_ALIASED).first()
     if unaliasing_object == None:
         abort(404)
     unaliasing_object.unalias()
