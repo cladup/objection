@@ -7,11 +7,13 @@ from app.object.json_schemas import ObjectSchema
 object_page = Blueprint('objects', __name__)
 
 
-@object_page.route('/v1/objects/<alias>', methods=['GET'])
-def get(alias):
+@object_page.route('/v1/objects/<component>/<type>/<key>', methods=['GET'])
+def get(component, type, key):
     """
     Get object by alias
+    Alias spec: {component}/{type}/{key}
     """
+    alias = "/".join([component, type, key])
     found_object = Object.query.filter_by(alias=alias, status=STATUS_ALIASED).first()
     schema = ObjectSchema()
     return schema.dumps(found_object)
