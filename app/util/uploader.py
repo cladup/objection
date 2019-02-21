@@ -9,6 +9,7 @@ IMAGE_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 GRAPHIC_EXTENSIONS = set(['fbx', 'glb', 'gltf'])
 ALLOWED_EXTENSIONS = IMAGE_EXTENSIONS.union(GRAPHIC_EXTENSIONS)
 
+
 def upload(graphic_object):
     """
     Upload object to cloud storage
