@@ -43,3 +43,16 @@ def alias(name):
     schema = ObjectSchema()
     return schema.dumps(aliasing_object)
 
+
+@object_page.route('/v1/objects/<alias>', methods=['DELETE'])
+def unalias(alias):
+    """
+    Unalias object
+    """
+    unaliasing_object = Object.query.filter_by(alias=alias).first()
+    if unaliasing_object == None:
+        abort(404)
+    unaliasing_object.unalias()
+    schema = ObjectSchema()
+    return schema.dumps(unaliasing_object)
+

@@ -42,3 +42,11 @@ class Object(db.Model):
         db.session.add(self)
         db.session.commit()
 
+    def unalias(self):
+        """
+        Unalias object and change state
+        """
+        self.status = STATUS_UNALIASED
+        db.session.add(self)
+        db.session.commit()
+
