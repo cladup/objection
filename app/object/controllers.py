@@ -1,5 +1,6 @@
 from flask import Blueprint, request, Response, jsonify, abort
 from app.util import uploader
+from app.util import blob
 from app.object.models import *
 from app.object.json_schemas import ObjectSchema
 
@@ -15,8 +16,7 @@ def get(component, type, key):
     """
     alias = "/".join([component, type, key])
     found_object = Object.query.filter_by(alias=alias, status=STATUS_ALIASED).first()
-    schema = ObjectSchema()
-    return schema.dumps(found_object)
+    return blob.find(found_object.name)
 
 
 @object_page.route('/v1/objects', methods=['POST'])
