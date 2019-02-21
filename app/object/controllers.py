@@ -1,10 +1,21 @@
 from flask import Blueprint, request, Response, jsonify, abort
 from app.util import uploader
-from app.object.models import Object
+from app.object.models import *
 from app.object.json_schemas import ObjectSchema
 
 
 object_page = Blueprint('objects', __name__)
+
+
+@object_page.route('/v1/objects/<alias>', methods=['GET'])
+def get(alias):
+    """
+    Get object by alias
+    """
+    found_object = Object.query.filter_by(alias=alias, status=STATUS_ALIASED).first()
+    schema = ObjectSchema()
+    #return schema.dumps(found_object)
+    return alias
 
 
 @object_page.route('/v1/objects', methods=['POST'])
@@ -36,7 +47,7 @@ def alias(name):
     alias = request.get_json().get('alias')
     if alias == None:
         return Response("Alias is missing", 400)
-    aliasing_object = Object.query.filter_by(name=name, status=Object.STATUS_STAGING).first()
+    aliasing_object = Object.query.filter_by(name=name, status=STATUS_STAGING).first()
     if aliasing_object == None:
         abort(404)
     aliasing_object.alias(alias)
@@ -49,7 +60,7 @@ def unalias(alias):
     """
     Unalias object
     """
-    unaliasing_object = Object.query.filter_by(alias=alias, status=Object.STATUS_ALIASED).first()
+    unaliasing_object = Object.query.filter_by(alias=alias, status=STATUS_ALIASED).first()
     if unaliasing_object == None:
         abort(404)
     unaliasing_object.unalias()
