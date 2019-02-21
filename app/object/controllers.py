@@ -7,7 +7,7 @@ from app.object.json_schemas import ObjectSchema
 object_page = Blueprint('objects', __name__)
 
 
-@object_page.route('/objects', methods=['POST'])
+@object_page.route('/v1/objects', methods=['POST'])
 def create():
     """
     Upload object to cloud storage
@@ -28,7 +28,7 @@ def create():
     return schema.dumps(new_object)
 
 
-@object_page.route('/objects/<name>', methods=['PATCH'])
+@object_page.route('/v1/objects/<name>', methods=['PATCH'])
 def alias(name):
     """
     Alias object name
