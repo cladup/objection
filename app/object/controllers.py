@@ -14,8 +14,7 @@ def get(alias):
     """
     found_object = Object.query.filter_by(alias=alias, status=STATUS_ALIASED).first()
     schema = ObjectSchema()
-    #return schema.dumps(found_object)
-    return alias
+    return schema.dumps(found_object)
 
 
 @object_page.route('/v1/objects', methods=['POST'])
