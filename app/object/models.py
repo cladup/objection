@@ -12,7 +12,7 @@ class Object(db.Model):
     """
     __tablename__ = 'objects'
     id = db.Column(db.Integer, primary_key=True)
-    alias = db.Column(db.String(100), nullable=False)
+    alias = db.Column('alias_link', db.String(100), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     type = db.Column(db.String(50), nullable=False)
     status = db.Column(db.String(50), nullable=False)
