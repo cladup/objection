@@ -15,7 +15,9 @@ def get(component, type, key):
     Alias spec: {component}/{type}/{key}
     """
     alias = "/".join([component, type, key])
-    found_object = Object.query.filter_by(alias=alias, status=STATUS_ALIASED).first()
+    found_object = Object.query.filter_by(alias_link=alias, status=STATUS_ALIASED).first()
+    if found_object == None:
+        abort(404)
     return blob.find(found_object.name)
 
 
@@ -49,7 +51,7 @@ def alias(name):
     if alias == None:
         return Response("Alias is missing", 400)
     # Unalias object when alias exists
-    aliased_object = Object.query.filter_by(alias=alias, status=STATUS_ALIASED).first()
+    aliased_object = Object.query.filter_by(alias_link=alias, status=STATUS_ALIASED).first()
     if aliased_object != None:
         aliased_object.unalias()
     # Alias object

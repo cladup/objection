@@ -6,7 +6,7 @@ class ObjectSchema(Schema):
     JSON Schema for Object model
     """
     id = fields.Integer()
-    alias = fields.Str()
+    alias_link = fields.Str()
     name = fields.Str()
     type = fields.Str()
     status = fields.Str()

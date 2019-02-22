@@ -20,7 +20,7 @@ def upgrade():
     op.create_table(
         'objects',
         sa.Column('id', sa.Integer, primary_key=True),
-        sa.Column('alias', sa.String(100), nullable=False),
+        sa.Column('alias_link', sa.String(100), nullable=False),
         sa.Column('name', sa.String(100), nullable=False),
         sa.Column('type', sa.String(50), nullable=False),
         sa.Column('status', sa.String(50), nullable=False),
