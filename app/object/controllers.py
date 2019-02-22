@@ -1,4 +1,4 @@
-from flask import Blueprint, request, Response, jsonify, abort
+from flask import Blueprint, request, Response, jsonify, abort, redirect
 from app.util import uploader
 from app.util import blob
 from app.object.models import *
@@ -18,7 +18,7 @@ def get(component, type, key):
     found_object = Object.query.filter_by(alias_link=alias, status=STATUS_ALIASED).first()
     if found_object == None:
         abort(404)
-    return blob.find(found_object.name)
+    return redirect(blob.generate_signed_url(found_object.name))
 
 
 @object_page.route('/v1/objects', methods=['POST'])
