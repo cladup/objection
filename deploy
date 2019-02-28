@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+import argparse
+import sys
+import subprocess
+import os
+
+
+# Import dotenv
+from dotenv import load_dotenv
+load_dotenv(verbose=True)
+
+description = "Objection build and push docker image to Google Container Registry"
+parser = argparse.ArgumentParser(description=description)
+parser.add_argument("-t", "--tag", help="Tag version of docker image", dest="tag", default="")
+args = parser.parse_args()
+
+# TODO: Change this into regular expression
+if len(args.tag) != 5:
+    print("Version must be in format: 0.0.1")
+    sys.exit()
+
+# Authenticate docker configuration
+print("Build and push docker image.")
+subprocess.run(["gcloud", "auth", "configure-docker"])
+# Build docker image
+subprocess.run(["docker", "build", "-t", "objection/{}".format(args.tag), "--file=deployment/production.Dockerfile", "."])
+subprocess.run(["docker", "tag", "objection/{}".format(args.tag), "us.gcr.io/{}/objection:{}".format(os.environ.get("PROJECT_ID"), args.tag)])
+subprocess.run(["docker", "push", "us.gcr.io/{}/objection:{}".format(os.environ.get("PROJECT_ID"), args.tag)])
+print("Done!")
+
+# TODO: Deploy to GKE
+
