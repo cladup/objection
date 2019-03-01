@@ -15,7 +15,9 @@ services:
     volumes:
       - ./var/mysql:/var/lib/mysql
   objection:
-    build: .
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     volumes:
       - .:/app/src
     ports:
