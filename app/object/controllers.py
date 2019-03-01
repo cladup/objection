@@ -8,7 +8,7 @@ from app.object.json_schemas import ObjectSchema
 object_page = Blueprint('objects', __name__)
 
 
-@object_page.route('/v1/objects/<component>/<type>/<key>', methods=['GET'])
+@object_page.route('/api/v1/objects/<component>/<type>/<key>', methods=['GET'])
 def get(component, type, key):
     """
     Get object by alias
@@ -21,7 +21,7 @@ def get(component, type, key):
     return redirect(blob.generate_signed_url(found_object.name))
 
 
-@object_page.route('/v1/objects', methods=['POST'])
+@object_page.route('/api/v1/objects', methods=['POST'])
 def create():
     """
     Upload object to cloud storage
@@ -42,7 +42,7 @@ def create():
     return schema.dumps(new_object)
 
 
-@object_page.route('/v1/objects/<name>', methods=['PATCH'])
+@object_page.route('/api/v1/objects/<name>', methods=['PATCH'])
 def alias(name):
     """
     Alias object name
@@ -63,7 +63,7 @@ def alias(name):
     return schema.dumps(aliasing_object)
 
 
-@object_page.route('/v1/objects/<name>', methods=['DELETE'])
+@object_page.route('/api/v1/objects/<name>', methods=['DELETE'])
 def unalias(name):
     """
     Unalias object

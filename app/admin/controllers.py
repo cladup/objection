@@ -13,7 +13,7 @@ def get():
     <!doctype html>
     <title>Upload new File</title>
     <h1>Upload new File</h1>
-    <form method=post enctype=multipart/form-data action=/v1/objects>
+    <form method=post enctype=multipart/form-data action=/api/v1/objects>
       <input type=file name=graphic_model>
       <input type=submit value=Upload>
     </form>
