@@ -118,3 +118,6 @@ dmypy.json
 # JSON files
 *.json
 
+# k8s yaml files
+/k8s-templates/*.yaml
+

@@ -3,6 +3,7 @@ import argparse
 import sys
 import subprocess
 import os
+import yaml
 
 
 # Import dotenv
@@ -23,11 +24,17 @@ if len(args.tag) != 5:
 print("Build and push docker image.")
 subprocess.run(["gcloud", "auth", "configure-docker"])
 # Build docker image
-project_id = os.environ.get("PROJECT_ID")
+docker_image_url = "us.gcr.io/{}/objection:{}".format(os.environ.get("PROJECT_ID"), args.tag)
 subprocess.run(["docker", "build", "-t", "objection/{}".format(args.tag), "--file=deployment/production.Dockerfile", "."])
-subprocess.run(["docker", "tag", "objection/{}".format(args.tag), "us.gcr.io/{}/objection:{}".format(project_id, args.tag)])
-subprocess.run(["docker", "push", "us.gcr.io/{}/objection:{}".format(project_id, args.tag)])
+subprocess.run(["docker", "tag", "objection/{}".format(args.tag), docker_image_url])
+subprocess.run(["docker", "push", docker_image_url])
 print("Done!")
+
+# Create kubernetes deployment yaml
+with open("k8s-templates/objection-deployment.yaml", "w") as f:
+    template = yaml.full_load(open("k8s-templates/objection-deployment.yaml.template"))
+    template['spec']['template']['spec']['containers'][0]['image'] = docker_image_url
+    yaml.dump(template, f, default_flow_style=False)
 
 # TODO: Deploy to GKE
 

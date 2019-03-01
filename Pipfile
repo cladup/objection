@@ -19,6 +19,7 @@ sphinx = "*"
 nanoid = "*"
 python-dotenv = "*"
 marshmallow-jsonapi = "*"
+pyyaml = "*"
 
 [requires]
 python_version = "3.7"
