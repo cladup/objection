@@ -17,3 +17,17 @@ spec:
         image: {image}
         ports:
         - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: objection
+  labels:
+    run: objection
+spec:
+  type: NodePort
+  ports:
+  - targetPort: 5000
+    protocol: TCP
+  selector:
+    run: objection
