@@ -1,11 +1,15 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from healthcheck import HealthCheck
 
 
 # Init flask application
 app = Flask(__name__)
 app.config.from_object(os.getenv('APP_CONFIG'))
+
+# Healthcheck
+health = HealthCheck(app, "/_/health")
 
 # Init database with SQLAlchemy
 db = SQLAlchemy(app)
