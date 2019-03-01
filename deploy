@@ -23,9 +23,10 @@ if len(args.tag) != 5:
 print("Build and push docker image.")
 subprocess.run(["gcloud", "auth", "configure-docker"])
 # Build docker image
+project_id = os.environ.get("PROJECT_ID")
 subprocess.run(["docker", "build", "-t", "objection/{}".format(args.tag), "--file=deployment/production.Dockerfile", "."])
-subprocess.run(["docker", "tag", "objection/{}".format(args.tag), "us.gcr.io/{}/objection:{}".format(os.environ.get("PROJECT_ID"), args.tag)])
-subprocess.run(["docker", "push", "us.gcr.io/{}/objection:{}".format(os.environ.get("PROJECT_ID"), args.tag)])
+subprocess.run(["docker", "tag", "objection/{}".format(args.tag), "us.gcr.io/{}/objection:{}".format(project_id, args.tag)])
+subprocess.run(["docker", "push", "us.gcr.io/{}/objection:{}".format(project_id, args.tag)])
 print("Done!")
 
 # TODO: Deploy to GKE
