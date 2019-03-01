@@ -36,5 +36,7 @@ with open("k8s-templates/objection-deployment.yaml", "w") as f:
     template['spec']['template']['spec']['containers'][0]['image'] = docker_image_url
     yaml.dump(template, f, default_flow_style=False)
 
-# TODO: Deploy to GKE
+# Deploy to GKE
+subprocess.run(["kubectl", "apply", "-f", "k8s-templates/objection-deployment.yaml"])
+subprocess.run(["kubectl", "rollout", "status", "deployment", "objection"])
 
