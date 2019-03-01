@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: objection
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: objection
+  template:
+    metadata:
+      labels:
+        run: objection
+    spec:
+      containers:
+      - name: objection
+        image: {image}
+        ports:
+        - containerPort: 5000
