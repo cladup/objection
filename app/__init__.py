@@ -1,5 +1,6 @@
 import os
-from flask import Flask
+from flask import Flask, send_file
+from flask_swagger_ui import get_swaggerui_blueprint
 from flask_sqlalchemy import SQLAlchemy
 from healthcheck import HealthCheck
 
@@ -10,6 +11,20 @@ app.config.from_object(os.getenv('APP_CONFIG'))
 
 # Healthcheck
 health = HealthCheck(app, "/_/health")
+
+# Configure Swagger
+SWAGGER_URL = '/api/docs'
+swaggerui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    SWAGGER_URL + '/swagger.yaml',
+    config={
+        'app_name': "Objection"
+    }
+)
+
+@app.route('/api/docs/swagger.yaml')
+def swagger_file():
+    return send_file('../docs/swagger.yaml')
 
 # Init database with SQLAlchemy
 db = SQLAlchemy(app)
@@ -25,6 +40,7 @@ from app.admin.controllers import admin_page
 
 app.register_blueprint(object_page)
 app.register_blueprint(admin_page)
+app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
 # Setup database
 db.create_all()
