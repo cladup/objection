@@ -1,0 +1,46 @@
+swagger: "2.0"
+info:
+  description: "Objection API documentation"
+  version: "1.0.0"
+  title: "Objection"
+  contact: 
+    email: "clad.up@clad-up.com"
+host: "objection.clad-up.com"
+basePath: "/api/v1"
+tags:
+- name: "objects"
+  description: "Managing objects"
+schemes:
+- "http"
+- "https"
+paths:
+  /objects/{component}/{type}/{key}:
+    get:
+      tags:
+      - "objects"
+      summary: "Get object by alias"
+      description: "Returns the object of component, type, key"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "component"
+        in: "path"
+        description: "Component of object: background, product, etc."
+        required: true
+        type: "string"
+      - name: "type"
+        in: "path"
+        description: "Type of object: graphic, image"
+        required: true
+        type: "string"
+        format: "int64"
+      - name: "key"
+        in: "path"
+        description: "Primary key of product or campaign"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        404:
+          description: "Object not found"
+
