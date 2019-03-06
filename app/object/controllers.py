@@ -26,15 +26,15 @@ def create():
     """
     Upload object to cloud storage
     """
-    if 'graphic_model' not in request.files:
-        return Response("graphic_model is empty", 400)
-    graphic_model = request.files.get('graphic_model')
-    if graphic_model.filename == '':
+    if 'object_file' not in request.files:
+        return Response("object_file is empty", 400)
+    object_file = request.files.get('object_file')
+    if object_file.filename == '':
         return Response("No selected file", 400)
-    if not uploader.allowed_file(graphic_model.filename):
+    if not uploader.allowed_file(object_file.filename):
         return Response("File extension not allowed", 400)
     # Upload and save to database
-    uploaded_blob = uploader.upload(graphic_model)
+    uploaded_blob = uploader.upload(object_file)
     file_type = uploader.file_extension(uploaded_blob.name)
     new_object = Object(uploaded_blob.name, uploaded_blob.name, file_type)
     new_object.save()

@@ -10,7 +10,7 @@ GRAPHIC_EXTENSIONS = set(['fbx', 'glb', 'gltf'])
 ALLOWED_EXTENSIONS = IMAGE_EXTENSIONS.union(GRAPHIC_EXTENSIONS)
 
 
-def upload(graphic_object):
+def upload(object_file):
     """
     Upload object to cloud storage
     In this app, mostly it'll be fbx, glTF, jpeg
@@ -22,13 +22,13 @@ def upload(graphic_object):
     destination_blob_name = "{}_{}.{}".format(
             generate(size=32),
             str(timestamp),
-            file_extension(secure_filename(graphic_object.filename)))
+            file_extension(secure_filename(object_file.filename)))
     blob = bucket.blob(destination_blob_name)
-    content_type = graphic_object.content_type
-    if file_extension(secure_filename(graphic_object.filename)) in GRAPHIC_EXTENSIONS:
-        content_type = _determine_graphic_content_type(graphic_object.filename)
+    content_type = object_file.content_type
+    if file_extension(secure_filename(object_file.filename)) in GRAPHIC_EXTENSIONS:
+        content_type = _determine_graphic_content_type(object_file.filename)
     # TODO: Change fbx blob to glTF and save both.
-    blob.upload_from_file(graphic_object, content_type=content_type)
+    blob.upload_from_file(object_file, content_type=content_type)
     return blob
 
 
