@@ -1,4 +1,4 @@
-from flask import Blueprint, request, Response, jsonify, abort, redirect
+from flask import Blueprint, request, Response, jsonify, abort, redirect, make_response
 from app.util import uploader
 from app.util import blob
 from app.object.models import *
@@ -39,7 +39,7 @@ def create():
     new_object = Object(uploaded_blob.name, uploaded_blob.name, file_type)
     new_object.save()
     schema = ObjectSchema()
-    return schema.dumps(new_object)
+    return make_response(schema.dumps(new_object), 201)
 
 
 @object_page.route('/api/v1/objects/<name>', methods=['PATCH'])
