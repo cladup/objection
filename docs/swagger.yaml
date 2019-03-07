@@ -43,4 +43,65 @@ paths:
       responses:
         404:
           description: "Object not found"
+  /objects:
+    post:
+      tags:
+      - "objects"
+      summary: "Upload a graphic model or image"
+      description: "Uploads to staging area and gives object name for aliasing"
+      consumes:
+      - "multipart/form-data"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "object_file"
+        in: "formData"
+        description: "The graphic or image file"
+        required: true
+        type: "file"
+      responses:
+        400:
+          description: "object_file empty, no file, not allowed file extension"
+  /objects/{name}:
+    patch:
+      tags:
+      - "objects"
+      summary: "Alias object with name in path"
+      description: "The alias will be used for getting the object. Alias format: {background_sphere|background_curve|background_skybox|background_floor|product}/{graphic|image}/{PK}"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Name of object in Google Cloud Storage"
+        required: true
+        type: "string"
+      - name: "alias"
+        in: "body"
+        description: "The alias for calling the object which has path's name"
+        required: true
+        type: "string"
+      responses:
+        400:
+          description: "Alias is missing"
+        404:
+          description: "Object with name not found"
+    delete:
+      tags:
+      - "objects"
+      summary: "Unalias object with name in path"
+      description: "When unaliased, the object will not be callable with that object anymore."
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Name of object in Google Cloud Storage"
+        required: true
+        type: "string"
+      responses:
+        404:
+          description: "Object with name not found"
 
