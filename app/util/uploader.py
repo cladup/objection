@@ -15,7 +15,7 @@ def upload(object_file):
     Upload object to cloud storage
     In this app, mostly it'll be fbx, glTF, jpeg
     """
-    client = storage.Client.from_service_account_json(os.environ.get('GCP_CREDENTIALS'))
+    client = storage.Client()
     bucket = client.get_bucket(os.environ.get('BUCKET'))
     # Nano id(Better uuid) + timestamp + file extension
     timestamp = int(datetime.datetime.now().timestamp() * 10**6)
