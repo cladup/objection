@@ -1,9 +1,13 @@
 import os
+import pymysql
 from flask import Flask, send_file
 from flask_swagger_ui import get_swaggerui_blueprint
 from flask_sqlalchemy import SQLAlchemy
 from healthcheck import HealthCheck
 
+
+# Install MySQL driver replacement
+pymysql.install_as_MySQLdb()
 
 # Import dotenv
 from dotenv import load_dotenv
