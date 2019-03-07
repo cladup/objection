@@ -5,7 +5,7 @@ info:
   title: "Objection"
   contact: 
     email: "clad.up@clad-up.com"
-host: "objection.clad-up.com"
+host: "localhost:5000"
 basePath: "/api/v1"
 tags:
 - name: "objects"
@@ -82,7 +82,6 @@ paths:
         in: "body"
         description: "The alias for calling the object which has path's name"
         required: true
-        type: "string"
       responses:
         400:
           description: "Alias is missing"
