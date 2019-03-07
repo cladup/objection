@@ -5,6 +5,10 @@ from flask_sqlalchemy import SQLAlchemy
 from healthcheck import HealthCheck
 
 
+# Import dotenv
+from dotenv import load_dotenv
+load_dotenv(verbose=True)
+
 # Init flask application
 app = Flask(__name__)
 app.config.from_object(os.getenv('APP_CONFIG'))
