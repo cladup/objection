@@ -22,6 +22,7 @@ pyyaml = "*"
 healthcheck = "*"
 flask-swagger-ui = "*"
 pymysql = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "3.7"
