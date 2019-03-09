@@ -3,6 +3,7 @@ import pymysql
 from flask import Flask, send_file
 from flask_swagger_ui import get_swaggerui_blueprint
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 from healthcheck import HealthCheck
 
 
@@ -16,6 +17,9 @@ load_dotenv(verbose=True)
 # Init flask application
 app = Flask(__name__)
 app.config.from_object(os.getenv('APP_CONFIG'))
+
+# Cross Origin
+CORS(app)
 
 # Healthcheck
 health = HealthCheck(app, "/_/health")
